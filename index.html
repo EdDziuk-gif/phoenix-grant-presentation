@@ -195,10 +195,13 @@
   #progress { position: fixed; bottom: 0; left: 0; height: 4px; background: var(--amber); transition: width 0.35s ease; z-index: 100; }
   #counter { position: fixed; bottom: 12px; right: 20px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); z-index: 100; letter-spacing: 0.05em; pointer-events: none; }
 
-  .nav-arrow { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.35); font-size: 28px; width: 48px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-  .nav-arrow:hover { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+  .nav-arrow { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: none; color: rgba(255,255,255,0.55); font-size: 32px; width: 52px; height: 90px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 200; border-radius: 8px; transition: background 0.2s, color 0.2s; }
+  .nav-arrow:hover { background: rgba(255,255,255,0.22); color: rgba(255,255,255,0.9); }
   #prev { left: 8px; }
   #next { right: 8px; }
+  #click-zones { position: fixed; inset: 0; z-index: 50; display: flex; pointer-events: none; }
+  #click-prev { flex: 0 0 30%; cursor: w-resize; pointer-events: auto; }
+  #click-next { flex: 1; cursor: e-resize; pointer-events: auto; }
 
   #notes-panel { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.88); color: #E5E7EB; font-size: 13px; line-height: 1.6; padding: 14px 32px 18px; z-index: 200; display: none; border-top: 2px solid var(--amber); max-height: 28vh; overflow-y: auto; }
   #notes-panel.visible { display: block; }
@@ -428,11 +431,15 @@
 
 </div>
 
+<div id="click-zones">
+  <div id="click-prev" onclick="go(-1)"></div>
+  <div id="click-next" onclick="go(1)"></div>
+</div>
 <button class="nav-arrow" id="prev" onclick="go(-1)">‹</button>
 <button class="nav-arrow" id="next" onclick="go(1)">›</button>
 <div id="progress"></div>
 <div id="counter"></div>
-<div id="key-hint">← → Space · N for notes · F for fullscreen</div>
+<div id="key-hint">Click to advance · ← → Space · N for notes · F for fullscreen</div>
 <div id="notes-panel">
   <div id="notes-label">Speaker Notes</div>
   <div id="notes-text"></div>
@@ -482,6 +489,7 @@
   })
 
   updateUI()
+  document.body.focus()
 </script>
 </body>
 </html>
